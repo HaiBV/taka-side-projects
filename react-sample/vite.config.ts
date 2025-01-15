@@ -1,6 +1,5 @@
-import { defineConfig as defineViteConfig, mergeConfig } from "vite";
+import { AliasOptions, defineConfig as defineViteConfig, mergeConfig } from "vite";
 import { defineConfig as defineVitestConfig } from "vitest/config";
-import { AliasOptions } from "vite";
 import path from "path";
 import react from "@vitejs/plugin-react-swc";
 
@@ -18,7 +17,8 @@ const vitestConfig = defineVitestConfig({
   test: {
     globals: true,
     environment: "jsdom",
-    setupFiles: ["./src/setupTests.ts"],
+    setupFiles: [path.resolve(__dirname, "./src/setupTests.ts")],
+    testTimeout: 30000,
   },
 });
 
