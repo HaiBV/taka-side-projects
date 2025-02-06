@@ -1,5 +1,5 @@
 import { expect, test, describe } from "vitest";
-import { handleMessages } from "@/utils/ampup";
+import { handleMessages } from "@/utils/handleMessages";
 
 describe("test sum", () => {
   test("at least 1 message", () => {
