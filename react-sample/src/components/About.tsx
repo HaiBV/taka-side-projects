@@ -4,6 +4,7 @@ import reactLogo from "@/assets/react.svg";
 import viteLogo from "/vite.svg";
 
 import { sum } from "@/utils/sum";
+import Joke from "@/components/Joke";
 
 const Home = () => {
   const [count, setCount] = useState(0);
@@ -29,6 +30,7 @@ const Home = () => {
       <p className="read-the-docs">
         1 + {count} = {sum(1, count)}
       </p>
+      <Joke />
     </>
   );
 };

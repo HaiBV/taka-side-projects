@@ -48,19 +48,20 @@ export const handleMessages = (messages: Message[]): Output => {
     if (message.type === "SessionStop") {
       if (hash[message.id]) {
         const duration = message.time - hash[message.id];
+        if (duration > 0) {
+          if (output.longest_duration === undefined || duration > output.longest_duration) {
+            output.longest_duration = duration;
+            output.longest_session_id = message.id;
+          }
 
-        if (output.longest_duration === undefined || duration > output.longest_duration) {
-          output.longest_duration = duration;
-          output.longest_session_id = message.id;
+          if (output.smallest_duration === undefined || duration < output.smallest_duration) {
+            output.smallest_duration = duration;
+            output.smallest_session_id = message.id;
+          }
+          badSessions.delete(message.id);
+          existValidSessons.add(message.id);
         }
 
-        if (output.smallest_duration === undefined || duration < output.smallest_duration) {
-          output.smallest_duration = duration;
-          output.smallest_session_id = message.id;
-        }
-
-        badSessions.delete(message.id);
-        existValidSessons.add(message.id);
         delete hash[message.id];
       } else {
         output.num_distinct_sessions++;

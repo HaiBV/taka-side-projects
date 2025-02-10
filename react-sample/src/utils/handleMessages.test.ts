@@ -212,7 +212,6 @@ describe("test sum", () => {
     });
   });
 
-
   test("3 valid sessions", () => {
     expect(
       handleMessages([
@@ -233,6 +232,29 @@ describe("test sum", () => {
       smallest_session_id: "123",
       smallest_duration: 9,
       bad_sessions: [],
+    });
+  });
+
+  test("3 valid sessions", () => {
+    expect(
+      handleMessages([
+        { id: "123", type: "SessionStart", time: 10 },
+        { id: "123", type: "StatusCharging", time: 2 },
+        { id: "123", type: "SessionStop", time: 1 },
+        { id: "456", type: "SessionStart", time: 2 },
+        { id: "456", type: "StatusCharging", time: 4 },
+        { id: "456", type: "SessionStop", time: 19 },
+        { id: "789", type: "SessionStart", time: 3 },
+        { id: "789", type: "StatusCharging", time: 66 },
+        { id: "789", type: "SessionStop", time: 99 },
+      ])
+    ).toStrictEqual({
+      num_distinct_sessions: 3,
+      longest_session_id: "789",
+      longest_duration: 96,
+      smallest_session_id: "456",
+      smallest_duration: 17,
+      bad_sessions: ["123"],
     });
   });
 });
