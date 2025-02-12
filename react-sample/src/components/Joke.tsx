@@ -1,12 +1,21 @@
 import useJoke from "@/hooks/useJoke";
 
 const Joke = () => {
-  const { jokes, isLoading, isError } = useJoke();
+  const { jokes, isLoading, error } = useJoke();
+
+  if (error) {
+    return <div>{`Error: ${error}`}</div>;
+  }
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
-      {isError && "Something went wrong..."}
-      {isLoading ? "loading..." : jokes.map((item) => <p className="read-the-docs">{item.joke}</p>)}
+      {jokes.map((item) => (
+        <p className="read-the-docs">{item.joke}</p>
+      ))}
     </>
   );
 };

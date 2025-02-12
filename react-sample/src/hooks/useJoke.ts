@@ -1,42 +1,45 @@
-import { fetchJoke } from "@/utils/request";
 import { useEffect, useState } from "react";
 
-type Joke = {
-  joke: string;
-};
+import { fetchJoke } from "@/utils/request";
+import { Joke } from "@/types/Joke";
 
 const useJoke = () => {
   const [jokes, setJokes] = useState<Joke[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    let didCancel = false;
+    const abortController = new AbortController();
+    const signal = abortController.signal;
 
     const fetchJokes = async () => {
       setIsLoading(true);
+      setError("");
       try {
-        const jokes = await fetchJoke<Joke[]>("/jokes");
-        if (!didCancel) {
-          setJokes(jokes);
+        const jokes = await fetchJoke<Joke[]>("/jokes", { signal });
+        setJokes(jokes);
+      } catch (error) {
+        console.error(error);
+        if (error instanceof Error) {
+          if (error.name === "AbortError") {
+            console.log("Fetch aborted");
+          } else {
+            setError(`Error: ${error.message}`);
+          }
+        } else {
+          setError("Unknown error occurred");
         }
-      } catch (err) {
-        if (!didCancel) {
-          setIsError(true);
-          console.error(err);
-        }
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     };
 
     fetchJokes();
 
-    return () => {
-      didCancel = true;
-    };
+    return () => abortController.abort();
   }, []);
 
-  return { jokes, isLoading, isError };
+  return { jokes, isLoading, error };
 };
 
 export default useJoke;
