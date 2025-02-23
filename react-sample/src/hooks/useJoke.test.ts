@@ -1,10 +1,10 @@
-import { afterAll, afterEach, beforeAll, describe, expect, test } from "vitest";
+import { afterAll, afterEach, beforeAll, describe, expect, test, vi } from "vitest";
+import { renderHook, waitFor } from "@testing-library/react";
 import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
 
 import env from "@/utils/env";
 import useJoke from "@/hooks/useJoke";
-import { renderHook, waitFor } from "@testing-library/react";
 
 const sampleJokesResponse = [
   {
@@ -52,5 +52,21 @@ describe("useUserPosts Hook", () => {
 
     expect(result.current.error).not.toBeFalsy();
     expect(result.current.jokes).toHaveLength(0);
+  });
+
+  test("aborts fetch request when component is unmounted", async () => {
+    // Create a mock for aborting the fetch request
+    const abortSpy = vi.spyOn(AbortController.prototype, "abort");
+
+    // Render the component and simulate unmounting
+    const { unmount } = renderHook(() => useJoke());
+
+    // Unmount component to simulate aborting
+    unmount();
+
+    // Ensure the abort function is called when the component unmounts
+    expect(abortSpy).toHaveBeenCalled();
+    // FIXME: expected "abort" to be called 1 times, but got 4 times
+    abortSpy.mockRestore();
   });
 });

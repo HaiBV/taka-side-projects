@@ -13,8 +13,10 @@ const Joke = () => {
 
   return (
     <>
-      {jokes.map((item) => (
-        <p className="read-the-docs">{item.joke}</p>
+      {jokes.map((item, index) => (
+        <p key={index} className="read-the-docs">
+          {item.joke}
+        </p>
       ))}
     </>
   );
