@@ -18,6 +18,9 @@ const vitestConfig = defineVitestConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: [path.resolve(__dirname, "./src/vitest.setup.ts")],
+    coverage: {
+      reporter: ["text", "html"],
+    },
     testTimeout: 30000,
   },
 });

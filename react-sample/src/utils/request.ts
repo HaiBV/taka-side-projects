@@ -1,12 +1,11 @@
-import env from "./env";
-
+import env from "@/utils/env";
 async function request<TResponse>(fullUrl: string, config: RequestInit = {}): Promise<TResponse> {
   try {
     const response = await fetch(fullUrl, config);
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error(`Error fetching data: HTTP error! status: ${response.status}`);
     }
-    return await response.json();
+    return (await response.json()) as TResponse;
   } catch (error) {
     throw new Error(`Error fetching data: ${(error as Error).message}`);
   }
@@ -21,5 +20,5 @@ export async function fetchJoke<TResponse>(endpoint: string, config: RequestInit
       "x-rapidapi-host": env("JOKE_API_HOST"),
     },
   };
-  return await request(fullUrl, { ...baseConfigs, ...config });
+  return await request<TResponse>(fullUrl, { ...baseConfigs, ...config });
 }
