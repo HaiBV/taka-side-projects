@@ -1,4 +1,4 @@
-import { expect, test, describe } from "vitest";
+import { describe, test, expect } from "vitest";
 import { sum } from "@/utils/sum";
 
 describe("test sum", () => {

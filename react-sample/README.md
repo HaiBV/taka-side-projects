@@ -57,10 +57,10 @@ Taka step
 
 1. Absolute import
 2. Setup unit test
-3. Unit test and impliment sum function
+3. Unit test and implement sum function
 4. Unit test for App component
 5. Setup environment variable
 6. Setup request utility
-7. Create unit test and impliment useJoke hook to fetch data
+7. Create unit test and implement useJoke hook to fetch data
 8. Create unit test and implement Jokes component
 9. Setup route
