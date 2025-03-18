@@ -2,10 +2,11 @@ import path from "path";
 import { AliasOptions, defineConfig as defineViteConfig, mergeConfig } from "vite";
 import { defineConfig as defineVitestConfig } from "vitest/config";
 import react from "@vitejs/plugin-react-swc";
+import tailwindcss from "@tailwindcss/vite";
 
 // https://vite.dev/config/
 const viteConfig = defineViteConfig({
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

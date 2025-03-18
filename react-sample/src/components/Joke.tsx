@@ -14,7 +14,7 @@ const Joke = () => {
   return (
     <>
       {jokes.map((item, index) => (
-        <p key={index} className="read-the-docs">
+        <p key={index} className="read-the-docs text-3xl font-bold underline">
           {item.joke}
         </p>
       ))}
