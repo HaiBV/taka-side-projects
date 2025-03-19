@@ -3,7 +3,7 @@ import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
 
 import env from "@/utils/env";
-import { fetchJoke } from "./request";
+import { fetchJoke } from "@/utils/request";
 import { Joke } from "@/types/Joke";
 
 const sampleJokesResponse = [

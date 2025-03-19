@@ -4,7 +4,7 @@ import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
 
 import env from "@/utils/env";
-import Joke from "./Joke";
+import Joke from "@/components/Joke";
 
 const sampleJokesResponse = [
   {
