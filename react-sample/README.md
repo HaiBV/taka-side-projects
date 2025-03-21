@@ -64,3 +64,7 @@ Taka step
 7. Create unit test and implement useJoke hook to fetch data
 8. Create unit test and implement Jokes component
 9. Setup route
+10. Update folder structure
+11. Update layouts
+    1. Clean up init content
+    2. Update footer
