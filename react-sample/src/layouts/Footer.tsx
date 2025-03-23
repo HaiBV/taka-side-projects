@@ -1,4 +1,4 @@
-import { FaXTwitter } from "react-icons/fa6";
+import { FaXTwitter, FaCcVisa, FaCcMastercard, FaCcPaypal, FaCcApplePay, FaGooglePay } from "react-icons/fa6";
 import { BiLogoFacebookCircle, BiLogoInstagram, BiLogoLinkedinSquare, BiLogoYoutube } from "react-icons/bi";
 
 type ImageProps = {
@@ -17,7 +17,12 @@ type ColumnLinks = {
   links: Links[];
 };
 
-type SocialMediaLinks = {
+type SocialMediaLink = {
+  url: string;
+  icon: React.ReactNode;
+};
+
+type PaymentMethodLink = {
   url: string;
   icon: React.ReactNode;
 };
@@ -27,28 +32,23 @@ type Props = {
   heading: string;
   description: string;
   columnLinks: ColumnLinks[];
-  socialMediaLinks: SocialMediaLinks[];
+  socialMediaLinks: SocialMediaLink[];
   footerText?: string;
   footerImages: ImageProps[];
+  paymentMethodLinks: PaymentMethodLink[];
 };
 
 export type FooterProps = React.ComponentPropsWithoutRef<"section"> & Partial<Props>;
 
 const Footer = (props: FooterProps) => {
-  const { logo, heading, description, footerImages, columnLinks, socialMediaLinks, footerText } = {
+  const { columnLinks, footerText, paymentMethodLinks } = {
     ...FooterDefaults,
     ...props,
   };
 
   return (
-    <footer className="px-[5%] py-12 md:py-18 lg:py-20">
-      <div className="container">
-        <div className="lg:flex lg:items-start lg:justify-between">
-          <div className="rb-6 max-w-lg">
-            <h1 className="mb-5 text-6xl font-bold md:mb-6 md:text-9xl lg:text-10xl">{heading}</h1>
-            <p>{description}</p>
-          </div>
-        </div>
+    <footer className="px-global py-20 font-satoshi">
+      <div className="container mx-auto">
         <div className="py-12 md:py-18 lg:py-20">
           <div className="h-px w-full bg-black" />
         </div>
@@ -68,29 +68,11 @@ const Footer = (props: FooterProps) => {
             </div>
           ))}
         </div>
-
-        <div className="rb-6 col-span-1 flex flex-col items-start justify-between pb-6 sm:flex-row sm:items-center md:pb-8 lg:col-span-2">
-          <a href={logo.url}>
-            <img src={logo.src} alt={logo.alt} className="mb-6 inline-block sm:mb-0" />
-          </a>
-          <div className="ml-3 flex">
-            {footerImages.map((image, index) => (
-              <img
-                key={index}
-                src={image.src}
-                alt={image.alt}
-                className="-ml-3 size-12 min-h-12 min-w-12 rounded-full border-2 border-white object-cover"
-              />
-            ))}
-          </div>
-        </div>
-        <div className="h-px w-full bg-black" />
-        <div className="flex flex-col-reverse items-start gap-4 pb-4 pt-6 text-sm sm:flex-row sm:items-center sm:justify-between md:pb-0 md:pt-8">
-          <div className="flex flex-col-reverse items-start md:flex-row md:gap-6 lg:items-center">
-            <p>{footerText}</p>
-          </div>
+        <div className="h-px w-full bg-black/10" />
+        <div className="flex flex-col items-center gap-4 pt-4 text-sm sm:flex-row sm:justify-between md:pt-8">
+          <p>{footerText}</p>
           <div className="flex items-center justify-center gap-3">
-            {socialMediaLinks.map((link, index) => (
+            {paymentMethodLinks.map((link, index) => (
               <a key={index} href={link.url}>
                 {link.icon}
               </a>
@@ -102,7 +84,7 @@ const Footer = (props: FooterProps) => {
   );
 };
 
-export const FooterDefaults: Props = {
+const FooterDefaults: Props = {
   logo: {
     url: "#",
     src: "https://d22po4pjz3o32e.cloudfront.net/logo-image.svg",
@@ -113,63 +95,39 @@ export const FooterDefaults: Props = {
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.",
   columnLinks: [
     {
-      title: "Column One",
+      title: "Company",
       links: [
-        { title: "Link One", url: "#" },
-        { title: "Link Two", url: "#" },
-        { title: "Link Three", url: "#" },
-        { title: "Link Four", url: "#" },
-        { title: "Link Five", url: "#" },
+        { title: "About", url: "#" },
+        { title: "Features", url: "#" },
+        { title: "Works", url: "#" },
+        { title: "Career", url: "#" },
       ],
     },
     {
-      title: "Column Two",
+      title: "HELP",
       links: [
-        { title: "Link Six", url: "#" },
-        { title: "Link Seven", url: "#" },
-        { title: "Link Eight", url: "#" },
-        { title: "Link Nine", url: "#" },
-        { title: "Link Ten", url: "#" },
+        { title: "Customer Support", url: "#" },
+        { title: "Delivery Details", url: "#" },
+        { title: "Terms & Conditions", url: "#" },
+        { title: "Privacy Policy", url: "#" },
       ],
     },
     {
-      title: "Column Three",
+      title: "FAQ",
       links: [
-        { title: "Link Eleven", url: "#" },
-        { title: "Link Twelve", url: "#" },
-        { title: "Link Thirteen", url: "#" },
-        { title: "Link Fourteen", url: "#" },
-        { title: "Link Fifteen", url: "#" },
+        { title: "Customer Support", url: "#" },
+        { title: "Delivery Details", url: "#" },
+        { title: "Terms & Conditions", url: "#" },
+        { title: "Privacy Policy", url: "#" },
       ],
     },
     {
-      title: "Column Four",
+      title: "RESOURCES",
       links: [
-        { title: "Link Sixteen", url: "#" },
-        { title: "Link Seventeen", url: "#" },
-        { title: "Link Eighteen", url: "#" },
-        { title: "Link Nineteen", url: "#" },
-        { title: "Link Twenty", url: "#" },
-      ],
-    },
-    {
-      title: "Column Five",
-      links: [
-        { title: "Link Twenty One", url: "#" },
-        { title: "Link Twenty Two", url: "#" },
-        { title: "Link Twenty Three", url: "#" },
-        { title: "Link Twenty Four", url: "#" },
-        { title: "Link Twenty Five", url: "#" },
-      ],
-    },
-    {
-      title: "Column Six",
-      links: [
-        { title: "Link Twenty Six", url: "#" },
-        { title: "Link Twenty Seven", url: "#" },
-        { title: "Link Twenty Eight", url: "#" },
-        { title: "Link Twenty Nine", url: "#" },
-        { title: "Link Thirty", url: "#" },
+        { title: "Free eBook", url: "#" },
+        { title: "Development Tutorial", url: "#" },
+        { title: "How to - Blog", url: "#" },
+        { title: "Youtube Playlist", url: "#" },
       ],
     },
   ],
@@ -180,7 +138,14 @@ export const FooterDefaults: Props = {
     { url: "#", icon: <BiLogoLinkedinSquare /* className="size-6" */ /> },
     { url: "#", icon: <BiLogoYoutube /* className="size-6" */ /> },
   ],
-  footerText: "Shop.co © 2000-2023, All Rights Reserved.",
+  footerText: "Shop.co © 2000-2023, All Rights Reserved",
+  paymentMethodLinks: [
+    { url: "#", icon: <FaCcVisa /> },
+    { url: "#", icon: <FaCcMastercard /> },
+    { url: "#", icon: <FaCcPaypal /> },
+    { url: "#", icon: <FaCcApplePay /> },
+    { url: "#", icon: <FaGooglePay /> },
+  ],
   footerImages: [
     {
       src: "https://d22po4pjz3o32e.cloudfront.net/placeholder-image-small.svg",

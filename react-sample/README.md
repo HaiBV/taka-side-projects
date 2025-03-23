@@ -67,4 +67,5 @@ Taka step
 10. Update folder structure
 11. Update layouts
     1. Clean up init content
-    2. Update footer
+    2. Convert HTML to Component
+12. Update font-family
