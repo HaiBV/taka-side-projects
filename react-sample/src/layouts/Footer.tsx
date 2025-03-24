@@ -41,21 +41,29 @@ type Props = {
 export type FooterProps = React.ComponentPropsWithoutRef<"section"> & Partial<Props>;
 
 const Footer = (props: FooterProps) => {
-  const { columnLinks, footerText, paymentMethodLinks } = {
+  const { columnLinks, footerText, paymentMethodLinks, heading, description, socialMediaLinks } = {
     ...FooterDefaults,
     ...props,
   };
 
   return (
-    <footer className="px-global py-20 font-satoshi">
+    <footer className="px-global py-20">
       <div className="container mx-auto">
-        <div className="py-12 md:py-18 lg:py-20">
-          <div className="h-px w-full bg-black" />
-        </div>
-        <div className="rb-12 mb-12 grid grid-cols-1 items-start gap-x-8 gap-y-10 sm:grid-cols-3 md:mb-18 md:gap-y-12 lg:mb-20 lg:grid-cols-6">
+        <div className="mb-10 grid grid-cols-2 items-start gap-y-6 sm:grid-cols-3 md:mb-12 md:gap-y-12 lg:mb-14 lg:flex lg:justify-between lg:w-full">
+          <div className="col-span-2 sm:col-span-1 sm:row-span-2 lg:max-w-62">
+            <h1 className="font-integral font-bold text-3xl mb-4">{heading}</h1>
+            <p className="text-sm mb-6">{description}</p>
+            <div className="flex gap-4">
+              {socialMediaLinks.map((link, index) => (
+                <a key={index} href={link.url}>
+                  {link.icon}
+                </a>
+              ))}
+            </div>
+          </div>
           {columnLinks.map((column, index) => (
             <div key={index} className="flex flex-col items-start justify-start">
-              <h2 className="mb-2 font-semibold">{column.title}</h2>
+              <h2 className="mb-2 font-medium text-sm uppercase">{column.title}</h2>
               <ul>
                 {column.links.map((link, linkIndex) => (
                   <li key={linkIndex} className="py-2 text-sm">
@@ -90,9 +98,8 @@ const FooterDefaults: Props = {
     src: "https://d22po4pjz3o32e.cloudfront.net/logo-image.svg",
     alt: "Logo image",
   },
-  heading: "Medium length footer heading goes here",
-  description:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.",
+  heading: "SHOP.CO",
+  description: "We have clothes that suits your style and which you’re proud to wear. From women to men.",
   columnLinks: [
     {
       title: "Company",
