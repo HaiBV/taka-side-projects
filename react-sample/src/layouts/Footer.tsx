@@ -49,7 +49,7 @@ const Footer = (props: FooterProps) => {
   return (
     <footer className="px-global py-20">
       <div className="container mx-auto">
-        <div className="mb-10 grid grid-cols-2 items-start gap-y-6 sm:grid-cols-3 md:mb-12 md:gap-y-12 lg:mb-14 lg:flex lg:justify-between lg:w-full">
+        <div className="grid grid-cols-2 items-start gap-y-6 sm:grid-cols-3 md:gap-y-12 lg:mb-14 lg:flex lg:justify-between lg:w-full">
           <div className="col-span-2 sm:col-span-1 sm:row-span-2 lg:max-w-62">
             <h1 className="font-integral font-bold text-3xl mb-4">{heading}</h1>
             <p className="text-sm mb-6">{description}</p>
@@ -63,10 +63,10 @@ const Footer = (props: FooterProps) => {
           </div>
           {columnLinks.map((column, index) => (
             <div key={index} className="flex flex-col items-start justify-start">
-              <h2 className="mb-2 font-medium text-sm uppercase">{column.title}</h2>
-              <ul>
+              <h2 className="mb-3 font-medium text-sm uppercase tracking-[3px]">{column.title}</h2>
+              <ul className="flex flex-col gap-3">
                 {column.links.map((link, linkIndex) => (
-                  <li key={linkIndex} className="py-2 text-sm">
+                  <li key={linkIndex} className="text-sm">
                     <a href={link.url} className="flex items-center gap-3">
                       {link.title}
                     </a>
@@ -76,8 +76,8 @@ const Footer = (props: FooterProps) => {
             </div>
           ))}
         </div>
-        <div className="h-px w-full bg-black/10" />
-        <div className="flex flex-col items-center gap-4 pt-4 text-sm sm:flex-row sm:justify-between md:pt-8">
+        <div className="h-px w-full bg-black/10 mb-4 mt-10 md:mb-6 md:mt-12" />
+        <div className="flex flex-col items-center gap-4 text-sm sm:flex-row sm:justify-between">
           <p>{footerText}</p>
           <div className="flex items-center justify-center gap-3">
             {paymentMethodLinks.map((link, index) => (
@@ -139,19 +139,18 @@ const FooterDefaults: Props = {
     },
   ],
   socialMediaLinks: [
-    { url: "#", icon: <BiLogoFacebookCircle /* className="size-6" */ /> },
-    { url: "#", icon: <BiLogoInstagram /* className="size-6" */ /> },
-    { url: "#", icon: <FaXTwitter /* className="size-6 p -0.5" */ /> },
-    { url: "#", icon: <BiLogoLinkedinSquare /* className="size-6" */ /> },
-    { url: "#", icon: <BiLogoYoutube /* className="size-6" */ /> },
+    { url: "#", icon: <FaXTwitter size={28} /> },
+    { url: "#", icon: <BiLogoFacebookCircle size={28} /> },
+    { url: "#", icon: <BiLogoInstagram size={28} /> },
+    { url: "#", icon: <BiLogoYoutube size={28} /> },
   ],
   footerText: "Shop.co © 2000-2023, All Rights Reserved",
   paymentMethodLinks: [
-    { url: "#", icon: <FaCcVisa /> },
-    { url: "#", icon: <FaCcMastercard /> },
-    { url: "#", icon: <FaCcPaypal /> },
-    { url: "#", icon: <FaCcApplePay /> },
-    { url: "#", icon: <FaGooglePay /> },
+    { url: "#", icon: <FaCcVisa size={40} /> },
+    { url: "#", icon: <FaCcMastercard size={40} /> },
+    { url: "#", icon: <FaCcPaypal size={40} /> },
+    { url: "#", icon: <FaCcApplePay size={40} /> },
+    { url: "#", icon: <FaGooglePay size={40} /> },
   ],
   footerImages: [
     {

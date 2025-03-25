@@ -5,12 +5,12 @@ import PublicHeader from "@/layouts/PublicHeader";
 
 export default function PublicLayout() {
   return (
-    <>
+    <div className="min-h-dvh flex flex-col">
       <PublicHeader />
-      <main>
+      <main className="grow">
         <Outlet />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
