@@ -1,44 +1,17 @@
-import { FaXTwitter, FaCcVisa, FaCcMastercard, FaCcPaypal, FaCcApplePay, FaGooglePay } from "react-icons/fa6";
-import { BiLogoFacebookCircle, BiLogoInstagram, BiLogoLinkedinSquare, BiLogoYoutube } from "react-icons/bi";
+import {
+  FaCcVisa,
+  FaCcMastercard,
+  FaCcPaypal,
+  FaCcApplePay,
+  FaGooglePay,
+  FaXTwitter,
+  FaFacebook,
+  FaInstagram,
+  FaYoutube,
+} from "react-icons/fa6";
 
-type ImageProps = {
-  url?: string;
-  src: string;
-  alt?: string;
-};
-
-type Links = {
-  title: string;
-  url: string;
-};
-
-type ColumnLinks = {
-  title: string;
-  links: Links[];
-};
-
-type SocialMediaLink = {
-  url: string;
-  icon: React.ReactNode;
-};
-
-type PaymentMethodLink = {
-  url: string;
-  icon: React.ReactNode;
-};
-
-type Props = {
-  logo: ImageProps;
-  heading: string;
-  description: string;
-  columnLinks: ColumnLinks[];
-  socialMediaLinks: SocialMediaLink[];
-  footerText?: string;
-  footerImages: ImageProps[];
-  paymentMethodLinks: PaymentMethodLink[];
-};
-
-export type FooterProps = React.ComponentPropsWithoutRef<"section"> & Partial<Props>;
+import { FooterDefaultProps } from "@/types/Footer";
+import { FooterProps } from "@/types/Footer";
 
 const Footer = (props: FooterProps) => {
   const { columnLinks, footerText, paymentMethodLinks, heading, description, socialMediaLinks } = {
@@ -92,7 +65,9 @@ const Footer = (props: FooterProps) => {
   );
 };
 
-const FooterDefaults: Props = {
+export default Footer;
+
+const FooterDefaults: FooterDefaultProps = {
   logo: {
     url: "#",
     src: "https://d22po4pjz3o32e.cloudfront.net/logo-image.svg",
@@ -140,9 +115,9 @@ const FooterDefaults: Props = {
   ],
   socialMediaLinks: [
     { url: "#", icon: <FaXTwitter size={28} /> },
-    { url: "#", icon: <BiLogoFacebookCircle size={28} /> },
-    { url: "#", icon: <BiLogoInstagram size={28} /> },
-    { url: "#", icon: <BiLogoYoutube size={28} /> },
+    { url: "#", icon: <FaFacebook size={28} /> },
+    { url: "#", icon: <FaInstagram size={28} /> },
+    { url: "#", icon: <FaYoutube size={28} /> },
   ],
   footerText: "Shop.co © 2000-2023, All Rights Reserved",
   paymentMethodLinks: [
@@ -175,5 +150,3 @@ const FooterDefaults: Props = {
     },
   ],
 };
-
-export default Footer;
