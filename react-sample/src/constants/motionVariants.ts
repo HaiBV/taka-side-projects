@@ -1,6 +1,6 @@
 export const topLineVariants = {
   open: {
-    translateY: 8,
+    translateY: 6,
     transition: { delay: 0.1 },
   },
   rotatePhase: {
@@ -20,14 +20,14 @@ export const middleLineVariants = {
     transition: { duration: 0.1 },
   },
   closed: {
-    width: "1.5rem",
+    width: "1.25rem",
     transition: { delay: 0.3, duration: 0.2 },
   },
 };
 
 export const bottomLineVariants = {
   open: {
-    translateY: -8,
+    translateY: -6,
     transition: { delay: 0.1 },
   },
   rotatePhase: {

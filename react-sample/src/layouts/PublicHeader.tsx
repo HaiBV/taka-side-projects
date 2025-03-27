@@ -2,13 +2,14 @@ import { useState } from "react";
 // import { Button, useMediaQuery } from "@relume_io/relume-ui";
 // import type { ButtonProps } from "@relume_io/relume-ui";
 import { RxChevronDown /* RxChevronRight */ } from "react-icons/rx";
+import { FaSearch, FaShoppingCart, FaRegUserCircle } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { MegaMenuLinkProps, NavbarProps } from "@/types/Header";
 import { PublicHeaderDefaults } from "@/constants/defaultProps";
 import { bottomLineVariants, middleLineVariants, topLineVariants } from "@/constants/motionVariants";
 
 const PublicHeader = (props: NavbarProps) => {
-  const { logo, links /* , buttons */ } = {
+  const { logo, links, heading /* , buttons */ } = {
     ...PublicHeaderDefaults,
     ...props,
   };
@@ -18,35 +19,44 @@ const PublicHeader = (props: NavbarProps) => {
   const isMobile = false;
 
   return (
-    <section
-      className="relative z-[999] flex w-full items-center justify-between border-b border-border-primary bg-background-primary lg:min-h-18 lg:px-[5%]"
-    >
+    <section className="relative z-[999] flex w-full items-center justify-between border-b border-border-primary bg-background-primary lg:min-h-18 lg:px-[5%]">
       <div className="size-full lg:flex lg:items-center lg:justify-between">
         <div className="lg:flex">
-          <div className="flex min-h-16 items-center justify-between px-[5%] md:min-h-18 lg:min-h-full lg:px-0">
-            <a href={logo.url}>
-              <img src={logo.src} alt={logo.alt} />
-            </a>
+          <div className="flex min-h-16 items-center md:min-h-18 lg:min-h-full lg:px-0 px-global">
             <button
-              className="-mr-2 flex size-12 flex-col items-center justify-center lg:hidden"
+              className="flex size-6 flex-col items-center justify-center lg:hidden"
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}
             >
               <motion.span
-                className="my-[3px] h-0.5 w-6 bg-black"
+                className="my-0.5 h-0.5 w-5 bg-black"
                 animate={isMobileMenuOpen ? ["open", "rotatePhase"] : "closed"}
                 variants={topLineVariants}
               />
               <motion.span
-                className="my-[3px] h-0.5 w-6 bg-black"
+                className="my-0.5 h-0.5 w-5 bg-black"
                 animate={isMobileMenuOpen ? "open" : "closed"}
                 variants={middleLineVariants}
               />
               <motion.span
-                className="my-[3px] h-0.5 w-6 bg-black"
+                className="my-0.5 h-0.5 w-5 bg-black"
                 animate={isMobileMenuOpen ? ["open", "rotatePhase"] : "closed"}
                 variants={bottomLineVariants}
               />
             </button>
+            <a href={logo.url} className="font-integral font-bold text-3xl ml-4">
+              {heading}
+            </a>
+            <div className="flex gap-3 text-2xl ml-auto">
+              <button className="">
+                <FaSearch />
+              </button>
+              <button className="">
+                <FaShoppingCart />
+              </button>
+              <button className="">
+                <FaRegUserCircle />
+              </button>
+            </div>
           </div>
           <motion.div
             variants={{

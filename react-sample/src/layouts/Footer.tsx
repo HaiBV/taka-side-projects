@@ -20,7 +20,7 @@ const Footer = (props: FooterProps) => {
   };
 
   return (
-    <footer className="px-global py-20">
+    <footer className="px-global py-20 bg-grey-primary">
       <div className="container mx-auto">
         <div className="grid grid-cols-2 items-start gap-y-6 sm:grid-cols-3 md:gap-y-12 lg:mb-14 lg:flex lg:justify-between lg:w-full">
           <div className="col-span-2 sm:col-span-1 sm:row-span-2 lg:max-w-62">

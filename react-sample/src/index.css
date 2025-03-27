@@ -35,6 +35,8 @@
 @theme {
   --font-satoshi: "Satoshi", sans-serif;
   --font-integral: "Integral CF", sans-serif;
+
+  --color-grey-primary: #f0f0f0;
 }
 
 @utility px-global {

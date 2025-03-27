@@ -34,6 +34,7 @@ type LinkProps = {
 
 export type NavBarDefaultProps = {
   logo: ImageProps;
+  heading: string;
   links: LinkProps[];
   // buttons: ButtonProps[];
 };
