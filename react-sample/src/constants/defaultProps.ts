@@ -8,11 +8,8 @@ export const PublicHeaderDefaults: NavBarDefaultProps = {
   },
   heading: "SHOP.CO",
   links: [
-    { title: "Link One", url: "#" },
-    { title: "Link Two", url: "#" },
-    { title: "Link Three", url: "#" },
     {
-      title: "Link Four",
+      title: "Shop",
       url: "#",
       megaMenu: {
         categoryLinks: [
@@ -132,16 +129,8 @@ export const PublicHeaderDefaults: NavBarDefaultProps = {
         // },
       },
     },
+    { title: "On Sale", url: "#" },
+    { title: "New Arrivals", url: "#" },
+    { title: "Brands", url: "#" },
   ],
-  // buttons: [
-  //   {
-  //     title: "Button",
-  //     variant: "secondary",
-  //     size: "sm",
-  //   },
-  //   {
-  //     title: "Button",
-  //     size: "sm",
-  //   },
-  // ],
 };

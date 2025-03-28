@@ -1,12 +1,10 @@
 import { useState } from "react";
-// import { Button, useMediaQuery } from "@relume_io/relume-ui";
-// import type { ButtonProps } from "@relume_io/relume-ui";
 import { RxChevronDown /* RxChevronRight */ } from "react-icons/rx";
 import { FaSearch, FaShoppingCart, FaRegUserCircle } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { MegaMenuLinkProps, NavbarProps } from "@/types/Header";
 import { PublicHeaderDefaults } from "@/constants/defaultProps";
-import { bottomLineVariants, middleLineVariants, topLineVariants } from "@/constants/motionVariants";
+import { HamburgerIcon } from "@/components/HamburgerIcon";
 
 const PublicHeader = (props: NavbarProps) => {
   const { logo, links, heading /* , buttons */ } = {
@@ -19,34 +17,17 @@ const PublicHeader = (props: NavbarProps) => {
   const isMobile = false;
 
   return (
-    <section className="relative z-[999] flex w-full items-center justify-between border-b border-border-primary bg-background-primary lg:min-h-18 lg:px-[5%]">
-      <div className="size-full lg:flex lg:items-center lg:justify-between">
+    <section className="relative z-[999] flex w-full items-center justify-between lg:min-h-18 lg:px-global">
+      <div className="size-full lg:container lg:mx-auto lg:flex lg:items-center lg:justify-between">
         <div className="lg:flex">
           <div className="flex min-h-16 items-center md:min-h-18 lg:min-h-full lg:px-0 px-global">
-            <button
-              className="flex size-6 flex-col items-center justify-center lg:hidden"
-              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-            >
-              <motion.span
-                className="my-0.5 h-0.5 w-5 bg-black"
-                animate={isMobileMenuOpen ? ["open", "rotatePhase"] : "closed"}
-                variants={topLineVariants}
-              />
-              <motion.span
-                className="my-0.5 h-0.5 w-5 bg-black"
-                animate={isMobileMenuOpen ? "open" : "closed"}
-                variants={middleLineVariants}
-              />
-              <motion.span
-                className="my-0.5 h-0.5 w-5 bg-black"
-                animate={isMobileMenuOpen ? ["open", "rotatePhase"] : "closed"}
-                variants={bottomLineVariants}
-              />
+            <button className="lg:hidden" onClick={() => setIsMobileMenuOpen((prev) => !prev)}>
+              <HamburgerIcon isOpen={isMobileMenuOpen} />
             </button>
-            <a href={logo.url} className="font-integral font-bold text-3xl ml-4">
+            <a href={logo.url} className="font-integral font-bold text-2xl leading-none ml-4 mb-1 lg:ml-0">
               {heading}
             </a>
-            <div className="flex gap-3 text-2xl ml-auto">
+            <div className="flex gap-3 text-2xl ml-auto lg:hidden">
               <button className="">
                 <FaSearch />
               </button>
@@ -71,7 +52,7 @@ const PublicHeader = (props: NavbarProps) => {
             exit="close"
             animate={isMobileMenuOpen ? "open" : "close"}
             transition={{ duration: 0.4 }}
-            className="overflow-auto px-[5%] lg:ml-6 lg:flex lg:items-center lg:px-0 lg:[--height-closed:auto] lg:[--height-open:auto]"
+            className="overflow-auto px-[5%] lg:mx-10 lg:flex lg:items-center lg:px-0 lg:gap-6 lg:[--height-closed:auto] lg:[--height-open:auto]"
           >
             {links.map((link, index) =>
               link.megaMenu ? (
@@ -80,7 +61,7 @@ const PublicHeader = (props: NavbarProps) => {
                 <a
                   key={index}
                   href={link.url}
-                  className="block py-3 text-md first:pt-7 lg:px-4 lg:py-6 lg:text-base first:lg:pt-6"
+                  className="block py-3 text-md first:pt-7 lg:px-0 lg:py-6 lg:text-base first:lg:pt-6"
                 >
                   {link.title}
                 </a>
@@ -95,12 +76,13 @@ const PublicHeader = (props: NavbarProps) => {
             </div>
           </motion.div>
         </div>
-        <div className="hidden lg:flex lg:gap-4">
-          {/* {buttons.map((button, index) => (
-            <Button key={index} {...button}>
-              {button.title}
-            </Button>
-          ))} */}
+        <div className="hidden text-2xl lg:flex lg:gap-3">
+          <button className="">
+            <FaShoppingCart />
+          </button>
+          <button className="">
+            <FaRegUserCircle />
+          </button>
         </div>
       </div>
     </section>
@@ -114,7 +96,7 @@ const SubMenu = ({ title, isMobile, megaMenu }: { title: string; isMobile: boole
       onMouseLeave={() => !isMobile && setIsDropdownOpen(false)}
     >
       <button
-        className="flex w-full items-center justify-between gap-x-2 py-3 text-center text-md lg:w-auto lg:flex-none lg:justify-start lg:px-4 lg:py-6 lg:text-base"
+        className="flex w-full items-center justify-between gap-x-2 py-3 text-center text-md lg:w-auto lg:flex-none lg:justify-start lg:px-0 lg:py-6 lg:text-base"
         onClick={() => setIsDropdownOpen((prev) => !prev)}
       >
         <span>{title}</span>
@@ -146,9 +128,9 @@ const SubMenu = ({ title, isMobile, megaMenu }: { title: string; isMobile: boole
         exit="close"
         animate={isDropdownOpen ? "open" : "close"}
         transition={{ duration: 0.3 }}
-        className="bottom-auto left-0 top-full w-full min-w-full max-w-full overflow-hidden bg-background-primary lg:absolute lg:w-[100vw] lg:border-b lg:border-border-primary lg:px-[5%] lg:[--height-close:auto]"
+        className="bottom-auto left-0 top-full w-full min-w-full max-w-full overflow-hidden bg-white lg:absolute lg:w-[100vw] lg:px-global lg:[--height-close:auto]"
       >
-        <div className="mx-auto flex size-full max-w-full items-center justify-between">
+        <div className="mx-auto flex size-full max-w-full items-center justify-between lg:container lg:my-auto">
           <div className="w-full lg:flex">
             <div className="grid flex-1 gap-x-8 gap-y-6 py-4 pr-8 md:grid-cols-2 md:px-0 md:py-8 lg:py-8 lg:pr-8">
               {megaMenu.categoryLinks.map((group, index) => (
