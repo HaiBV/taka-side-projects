@@ -70,7 +70,7 @@ const SubMenu = ({ title, isMobile, megaMenu }: { title: string; isMobile: boole
                 </div>
               ))}
             </div>
-            <div className="max-w-none relative flex flex-1 p-6 md:py-8 md:pl-8 md:pr-0 lg:max-w-md">
+            <div className="max-w-none relative flex flex-1 py-6 md:py-8 md:pl-8 md:pr-0 lg:max-w-md">
               <div className="relative z-10 grid w-full auto-cols-fr auto-rows-max grid-cols-1 grid-rows-[max-content_max-content] gap-4">
                 <h4 className="text-sm font-semibold leading-[1.3]">{megaMenu.featuredSections.title}</h4>
                 <div className="grid auto-cols-fr grid-cols-1 grid-rows-[auto_auto] items-start gap-y-2 lg:grid-rows-[auto]">
