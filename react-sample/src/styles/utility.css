@@ -1,0 +1,12 @@
+@utility px-global {
+  @apply px-4;
+  @apply md:px-5;
+}
+
+@utility typo-h1 {
+  @apply font-integral text-4xl lg:text-[3.5rem];
+}
+
+@utility typo-h2 {
+  @apply font-integral text-[2rem] lg:text-5xl;
+}
