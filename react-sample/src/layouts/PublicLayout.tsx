@@ -7,10 +7,8 @@ export default function PublicLayout() {
   return (
     <div className="min-h-dvh flex flex-col">
       <PublicHeader />
-      <main className="grow px-global">
-        <div className="container mx-auto">
-          <Outlet />
-        </div>
+      <main className="grow">
+        <Outlet />
       </main>
       <Footer />
     </div>
