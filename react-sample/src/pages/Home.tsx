@@ -1,3 +1,5 @@
+import Logos from "@/components/Logos";
+
 const Home = () => {
   return (
     <>
@@ -6,13 +8,7 @@ const Home = () => {
           <h1 className="typo-h1">FIND CLOTHES THAT MATCHES YOUR STYLE</h1>
         </div>
       </div>
-      <div className="px-global bg-black">
-        <div className="container mx-auto">
-          <div className="py-10 lg:py-12">
-            <h2 className="typo-h2 text-white">Logos</h2>
-          </div>
-        </div>
-      </div>
+      <Logos />
       <div className="px-global">
         <div className="container mx-auto">
           <div className="mt-12 mb-10 lg:mt-18 lg:mb-16">
