@@ -10,3 +10,11 @@
 @utility typo-h2 {
   @apply font-integral text-[2rem] lg:text-5xl;
 }
+
+@utility typo-product-title {
+  @apply font-satoshi text-[1rem] lg:text-xl font-bold;
+}
+
+@utility typo-product-price {
+  @apply font-satoshi text-xl lg:text-2xl font-bold;
+}

@@ -13,7 +13,7 @@ export default function Logos() {
         <div className="py-10 lg:py-11">
           <div className="flex flex-wrap gap-y-4 gap-x-8 items-center justify-center lg:justify-between">
             {logos.map((logo) => (
-              <img src={logo.url} className="max-w-25 max-h-7" />
+              <img src={logo.url} className="max-w-25 max-h-7 md:max-w-none md:max-h-none" />
             ))}
           </div>
         </div>
