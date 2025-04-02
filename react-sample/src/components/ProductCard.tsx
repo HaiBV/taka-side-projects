@@ -1,5 +1,5 @@
 import { ProductCardProps } from "@/types/Product";
-import { BiSolidStar } from "react-icons/bi";
+import { FaStar /* FaStarHalf */ } from "react-icons/fa6";
 
 const productData = {
   url: "#",
@@ -29,7 +29,7 @@ export default function ProductCard(props: ProductCardProps) {
             {Array(rate)
               .fill(null)
               .map((_, starIndex) => (
-                <BiSolidStar key={starIndex} className="size-6" />
+                <FaStar key={starIndex} className="size-6 text-star" />
               ))}
           </div>
           <p className="">
