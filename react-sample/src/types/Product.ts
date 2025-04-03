@@ -8,7 +8,9 @@ export type ProductCardProps = React.ComponentPropsWithoutRef<"section"> &
     url: string;
     image: ImageProps;
     title: string;
-    price: string;
+    originPrice: number;
+    price: number;
+    discount: number;
     variant: string;
     rate: number;
   }>;

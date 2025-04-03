@@ -12,9 +12,13 @@
 }
 
 @utility typo-product-title {
-  @apply font-satoshi text-[1rem] lg:text-xl font-bold;
+  @apply font-satoshi text-base lg:text-xl font-bold;
 }
 
 @utility typo-product-price {
   @apply font-satoshi text-xl lg:text-2xl font-bold;
+}
+
+@utility typo-small {
+  @apply font-satoshi text-[0.625rem] lg:text-xs font-medium;
 }

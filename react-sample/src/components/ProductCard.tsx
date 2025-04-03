@@ -8,7 +8,9 @@ const productData = {
     alt: "Relume placeholder image",
   },
   title: "Product name",
-  price: "$55",
+  originPrice: 160,
+  price: 130,
+  discount: 30,
   variant: "Variant",
   rate: 4,
 };
@@ -16,7 +18,7 @@ const productData = {
 const TOTAL_RATE = 5;
 
 export default function ProductCard(props: ProductCardProps) {
-  const { url, image, title, price, rate } = { ...productData, ...props };
+  const { url, image, title, price, originPrice, discount, rate } = { ...productData, ...props };
   return (
     <a href={url} className="">
       <div className="aspect-square rounded-5 overflow-hidden">
@@ -37,7 +39,11 @@ export default function ProductCard(props: ProductCardProps) {
             <span className="text-black/60">{TOTAL_RATE}</span>
           </p>
         </div>
-        <div className="typo-product-price">{price}</div>
+        <div className="flex gap-1 lg:gap-2 items-center">
+          <div className="typo-product-price">${originPrice}</div>
+          <div className="typo-product-price text-black/40 line-through decoration-black/40">${price}</div>
+          <div className="typo-small py-1.5 px-3.5 leading-none bg-red/10 text-red rounded-16">-{discount}%</div>
+        </div>
       </div>
     </a>
   );
