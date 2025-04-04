@@ -1,6 +1,8 @@
 import Logos from "@/components/Logos";
 import ProductCard from "@/components/ProductCard";
 
+import { newArrivals } from "@/data/product";
+
 const Home = () => {
   return (
     <>
@@ -15,9 +17,9 @@ const Home = () => {
           <div className="mt-12 mb-10 lg:mt-18 lg:mb-16">
             <h2 className="typo-h2 text-center mb-8">New Arrivals</h2>
             <div className="grid grid-cols-7 lg:grid-cols-12 gap-4 lg:gap-5">
-              {[...new Array(4).fill(0)].map((_, index) => (
+              {newArrivals.map((product, index) => (
                 <div className="col-span-4 lg:col-span-3">
-                  <ProductCard key={index} />
+                  <ProductCard key={index} {...product} />
                 </div>
               ))}
             </div>
