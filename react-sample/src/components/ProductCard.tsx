@@ -9,7 +9,7 @@ const productData = {
   },
   title: "Product name",
   price: 130,
-  discountPrice: 160,
+  originPrice: 160,
   discount: 30,
   variant: "Variant",
   rate: 4,
@@ -18,8 +18,8 @@ const productData = {
 const TOTAL_RATE = 5;
 
 export default function ProductCard(props: ProductCardProps) {
-  const { url, image, title, price, discountPrice, discount, rate } = { ...productData, ...props };
-  const showDiscountPrice = price > discountPrice && discount > 0;
+  const { url, image, title, price, originPrice, discount, rate } = { ...productData, ...props };
+  const showDiscountPrice = price < originPrice && discount > 0;
   return (
     <a href={url} className="">
       <div className="aspect-square rounded-5 overflow-hidden">
@@ -44,7 +44,7 @@ export default function ProductCard(props: ProductCardProps) {
           <div className="typo-product-price">${price}</div>
           {showDiscountPrice && (
             <>
-              <div className="typo-product-price text-black/40 line-through decoration-black/40">${discountPrice}</div>
+              <div className="typo-product-price text-black/40 line-through decoration-black/40">${originPrice}</div>
               <div className="typo-small py-1.5 px-3.5 leading-none bg-red/10 text-red rounded-16">-{discount}%</div>
             </>
           )}
