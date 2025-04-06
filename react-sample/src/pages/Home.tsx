@@ -1,5 +1,5 @@
 import Logos from "@/components/Logos";
-import ProductCard from "@/components/ProductCard";
+import ProductList from "@/components/ProductList";
 
 import { newArrivals, topSelling } from "@/data/product";
 
@@ -16,13 +16,7 @@ const Home = () => {
         <div className="container mx-auto">
           <div className="mt-12 mb-10 lg:mt-18 lg:mb-16">
             <h2 className="typo-h2 text-center mb-8">New Arrivals</h2>
-            <div className="grid grid-cols-7 lg:grid-cols-12 gap-4 lg:gap-5">
-              {newArrivals.map((product, index) => (
-                <div className="col-span-4 lg:col-span-3">
-                  <ProductCard key={index} {...product} />
-                </div>
-              ))}
-            </div>
+            <ProductList products={newArrivals} />
             <div className="flex mt-6 lg:mt-9 lg:justify-center">
               <div className="grow lg:grow-0">
                 <button className="w-full py-4 px-13 border rounded-[62px] font-medium">
@@ -42,13 +36,7 @@ const Home = () => {
         <div className="container mx-auto">
           <div className="mt-10 mb-12 lg:mt-16 lg:mb-20">
             <h2 className="typo-h2 text-center mb-8">Top Selling</h2>
-            <div className="grid grid-cols-7 lg:grid-cols-12 gap-4 lg:gap-5">
-              {topSelling.map((product, index) => (
-                <div className="col-span-4 lg:col-span-3">
-                  <ProductCard key={index} {...product} />
-                </div>
-              ))}
-            </div>
+            <ProductList products={topSelling} />
             <div className="flex mt-6 lg:mt-9 lg:justify-center">
               <div className="grow lg:grow-0">
                 <button className="w-full py-4 px-13 border rounded-[62px] font-medium">

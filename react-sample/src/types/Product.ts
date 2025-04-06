@@ -14,3 +14,8 @@ export type ProductCardProps = React.ComponentPropsWithoutRef<"section"> &
     variant: string;
     rate: number;
   }>;
+
+export type ProductListProps = React.ComponentPropsWithoutRef<"section"> &
+  Partial<{
+    products: ProductCardProps[];
+  }>;
