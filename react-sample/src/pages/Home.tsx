@@ -51,6 +51,10 @@ const Home = () => {
         <div className="container mx-auto">
           <div className="bg-grey-primary pt-10 pb-7 px-6 rounded-[1.25rem] lg:py-18 lg:px-16 lg:rounded-[2.5rem]">
             <h2 className="typo-h2 text-center">BROWSE BY dress STYLE</h2>
+            <div>Casual</div>
+            <div>Formal</div>
+            <div>Party</div>
+            <div>Gym</div>
           </div>
         </div>
       </div>
