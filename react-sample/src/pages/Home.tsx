@@ -1,7 +1,7 @@
 import Logos from "@/components/Logos";
 import ProductList from "@/components/ProductList";
 
-import { newArrivals, topSelling } from "@/data/product";
+import { newArrivals, topSelling, productStyles } from "@/data/product";
 
 const Home = () => {
   return (
@@ -51,10 +51,16 @@ const Home = () => {
         <div className="container mx-auto">
           <div className="bg-grey-primary pt-10 pb-7 px-6 rounded-[1.25rem] lg:py-18 lg:px-16 lg:rounded-[2.5rem]">
             <h2 className="typo-h2 text-center">BROWSE BY dress STYLE</h2>
-            <div>Casual</div>
-            <div>Formal</div>
-            <div>Party</div>
-            <div>Gym</div>
+            <div className="mt-7 flex gap-y-4 flex-col lg:grid lg:grid-cols-13 lg:gap-5">
+              {productStyles.map((productStyle) => (
+                <div className="h-48 bg-white rounded-3xl py-4 px-6 relative lg:h-72 lg:col-span-8 lg:first:col-span-5 lg:last:col-span-5">
+                  <span className="text-2xl capitalize font-bold z-10 relative">{productStyle.name}</span>
+                  <div className="absolute inset-0 z-0 rounded-3xl overflow-hidden">
+                    <img className="w-full h-full object-cover" src={productStyle.img} alt={productStyle.name} />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

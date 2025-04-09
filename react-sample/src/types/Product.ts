@@ -19,3 +19,8 @@ export type ProductListProps = React.ComponentPropsWithoutRef<"section"> &
   Partial<{
     products: ProductCardProps[];
   }>;
+
+export type ProductStyleProps = {
+  name: string;
+  img: string;
+};

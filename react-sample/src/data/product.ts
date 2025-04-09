@@ -1,4 +1,4 @@
-import { ProductCardProps } from "@/types/Product";
+import { ProductCardProps, ProductStyleProps } from "@/types/Product";
 
 export const newArrivals: ProductCardProps[] = [
   {
@@ -99,5 +99,24 @@ export const topSelling: ProductCardProps[] = [
     originPrice: 210,
     discount: 0,
     rate: 5,
+  },
+];
+
+export const productStyles: ProductStyleProps[] = [
+  {
+    name: "Casual",
+    img: "/styles/casual.png",
+  },
+  {
+    name: "Formal",
+    img: "/styles/formal.png",
+  },
+  {
+    name: "Party",
+    img: "/styles/party.png",
+  },
+  {
+    name: "Gym",
+    img: "/styles/gym.png",
   },
 ];
