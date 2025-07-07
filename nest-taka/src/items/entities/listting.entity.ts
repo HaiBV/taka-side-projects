@@ -1,29 +1,11 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { AbstractEntity } from 'src/database/abstract.entity';
+import { Column, Entity } from 'typeorm';
 
 @Entity()
-export class Listing {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Listing extends AbstractEntity<Listing> {
   @Column()
   name: string;
 
   @Column()
   public: boolean;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
-
-  constructor(listing: Partial<Listing>) {
-    Object.assign(this, listing);
-  }
 }

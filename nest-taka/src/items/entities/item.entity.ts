@@ -1,21 +1,21 @@
 import {
   Column,
-  CreateDateColumn,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
   OneToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'typeorm';
 import { Listing } from './listting.entity';
+import { AbstractEntity } from 'src/database/abstract.entity';
+import { Comment } from './comment.entity';
+import { Tag } from './tag.entity';
 
 @Entity({
   name: 'items',
 })
-export class Item {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Item extends AbstractEntity<Item> {
   @Column()
   name: string;
 
@@ -26,13 +26,10 @@ export class Item {
   @JoinColumn()
   listing: Listing;
 
-  @CreateDateColumn()
-  createdAt: Date;
+  @OneToMany(() => Comment, (comment) => comment.item, { cascade: true })
+  comments: Comment[];
 
-  @UpdateDateColumn()
-  updatedAt: Date;
-
-  constructor(item: Partial<Item>) {
-    Object.assign(this, item);
-  }
+  @ManyToMany(() => Tag, { cascade: true })
+  @JoinTable()
+  tags: Tag[];
 }
