@@ -47,16 +47,18 @@ export class ItemsService {
   }
 
   async update(id: number, updateItemDto: UpdateItemDto) {
-    const item = await this.itemRepository.findOneBy({ id });
-    if (!item) {
-      throw new Error(`Item with id ${id} not found`);
-    }
-    item.public = updateItemDto.public;
-    const comments = updateItemDto.comments.map(
-      (comment) => new Comment(comment),
-    );
-    item.comments = comments;
-    await this.entityManager.save(item);
+    await this.entityManager.transaction(async (entityManager) => {
+      const item = await this.itemRepository.findOneBy({ id });
+      if (!item) {
+        throw new Error(`Item with id ${id} not found`);
+      }
+      item.public = updateItemDto.public;
+      const comments = updateItemDto.comments.map(
+        (comment) => new Comment(comment),
+      );
+      item.comments = comments;
+      await entityManager.save(item);
+    });
     return `This action updates a #${id} item`;
   }
 
