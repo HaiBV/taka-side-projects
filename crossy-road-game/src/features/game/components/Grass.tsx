@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { tileSize, tilesPerRow } from "../../constants";
+import { tileSize, tilesPerRow } from "../constants";
 
 export const Grass = ({ rowIndex, children }: { rowIndex: number; children?: ReactNode }) => {
   return (
