@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
 import { tileSize, tilesPerRow } from "../constants";
 
-export const Grass = ({ rowIndex, children }: { rowIndex: number; children?: ReactNode }) => {
+export const Road = ({ rowIndex, children }: { rowIndex: number; children?: ReactNode }) => {
   return (
     <group position-y={rowIndex * tileSize}>
-      <mesh receiveShadow>
+      <mesh>
         <boxGeometry args={[tilesPerRow * tileSize, tileSize, 3]} />
-        <meshLambertMaterial color={0xbaf455} flatShading />
+        <meshLambertMaterial color={0x454a49} flatShading />
       </mesh>
       {children}
     </group>
