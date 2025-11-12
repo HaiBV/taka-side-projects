@@ -24,3 +24,5 @@ export type Row =
         color: THREE.ColorRepresentation;
       }[];
     };
+
+export type MoveDirection = "forward" | "backward" | "left" | "right";
