@@ -35,7 +35,6 @@ export default function usePlayerAnimation(ref: React.RefObject<THREE.Group | nu
   }
 
   function setRotation(player: THREE.Group, progress: number) {
-    const startRotation = player.rotation.z;
     let endRotation = 0;
 
     switch (state.movesQueue[0]) {
@@ -55,7 +54,7 @@ export default function usePlayerAnimation(ref: React.RefObject<THREE.Group | nu
         break;
     }
 
-    player.rotation.z = THREE.MathUtils.lerp(startRotation, endRotation, progress);
+    player.children[0].rotation.z = THREE.MathUtils.lerp(player.children[0].rotation.z, endRotation, progress);
   }
 
   useFrame(() => {
