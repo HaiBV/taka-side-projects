@@ -1,5 +1,6 @@
 import type { MoveDirection } from "../types";
 import { endsUpInvalidPosition } from "../utils/endsUpInvalidPosition";
+import useMapStore from "./map";
 
 export const state: {
   currentRow: number;
@@ -40,5 +41,9 @@ export function stepCompleted() {
       break;
     default:
       break;
+  }
+
+  if (state.currentRow === useMapStore.getState().rows.length - 10) {
+    useMapStore.getState().addRows();
   }
 }

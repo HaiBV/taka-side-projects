@@ -1,8 +1,9 @@
-import { rows } from "../metadata";
+import useMapStore from "../stores/map";
 import { Grass } from "./Grass";
 import { Row } from "./Row";
 
 export const Map = () => {
+  const rows = useMapStore((state) => state.rows);
   return (
     <>
       <Grass rowIndex={-2} />
