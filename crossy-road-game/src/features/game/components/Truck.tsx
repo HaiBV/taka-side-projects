@@ -3,9 +3,10 @@ import * as THREE from "three";
 import { tileSize } from "../constants";
 import useVehicleAnimation from "../hooks/useVehicleAnimation";
 import { Wheel } from "./Wheel";
+import useHitDetection from "../hooks/useHitDetection";
 
 export function Truck({
-  // rowIndex,
+  rowIndex,
   initialTileIndex,
   direction,
   speed,
@@ -19,6 +20,7 @@ export function Truck({
 }) {
   const car = useRef<THREE.Group>(null);
   useVehicleAnimation(car, direction, speed);
+  useHitDetection(car, rowIndex);
 
   return (
     <group position-x={initialTileIndex * tileSize} rotation-z={direction ? 0 : Math.PI} ref={car}>

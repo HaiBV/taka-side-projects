@@ -5,6 +5,7 @@ import { generateRows } from "../utils/generateRows";
 interface StoreState {
   rows: Row[];
   addRows: () => void;
+  reset: () => void;
 }
 
 const useMapStore = create<StoreState>((set) => ({
@@ -14,6 +15,9 @@ const useMapStore = create<StoreState>((set) => ({
     set((state) => ({
       rows: [...state.rows, ...newRows],
     }));
+  },
+  reset: () => {
+    set({ rows: generateRows(20) });
   },
 }));
 
