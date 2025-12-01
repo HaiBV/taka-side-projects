@@ -7,3 +7,6 @@ pnpm-lock.yaml
 .env
 
 nest-taka/dist
+
+.next
+next-env.d.ts
