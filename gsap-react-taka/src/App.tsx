@@ -5,15 +5,25 @@ function App() {
     <>
       <header>
         <nav>
-          <button>The GSAP Field</button>
+          <button className="nav-logo">The GSAP Field</button>
           <ul>
-            <li>Base</li>
-            <li>Makes</li>
-            <li>Skills</li>
-            <li>Story</li>
-            <li>Signal</li>
+            <li>
+              <a>Base</a>
+            </li>
+            <li>
+              <a>Makes</a>
+            </li>
+            <li>
+              <a>Skills</a>
+            </li>
+            <li>
+              <a>Story</a>
+            </li>
+            <li>
+              <a>Signal</a>
+            </li>
           </ul>
-          <button>Get If For Free</button>
+          <button className="nav-cta">Get If For Free</button>
         </nav>
       </header>
     </>
