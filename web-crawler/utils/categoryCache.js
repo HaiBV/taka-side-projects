@@ -1,11 +1,12 @@
 const fs = require("fs");
 const path = require("path");
 const { getDateTime } = require("./getDateTime");
+const { ensureOutputDirectory } = require("./outputDir");
 
 const CACHE_PREFIX = "category-cache-";
 const CACHE_HEADER = "Url\n";
 
-const saveCategoryCache = (urls, directory = process.cwd()) => {
+const saveCategoryCache = (urls, directory = ensureOutputDirectory()) => {
   const uniqueUrls = [...new Set(urls.filter(Boolean))];
   const filePath = path.join(directory, `${CACHE_PREFIX}${getDateTime()}.csv`);
   const rows = uniqueUrls.map((url) => `"${String(url).replaceAll('"', '""')}"`).join("\n");
@@ -20,7 +21,7 @@ const parseCachedUrl = (value) => {
     : url;
 };
 
-const findLatestCategoryCache = (directory = process.cwd()) => {
+const findLatestCategoryCache = (directory = ensureOutputDirectory()) => {
   if (!fs.existsSync(directory)) {
     return null;
   }
@@ -37,7 +38,7 @@ const findLatestCategoryCache = (directory = process.cwd()) => {
   return files[0]?.filePath || null;
 };
 
-const loadCategoryCache = (directory = process.cwd()) => {
+const loadCategoryCache = (directory = ensureOutputDirectory()) => {
   const filePath = findLatestCategoryCache(directory);
   if (!filePath) {
     return null;

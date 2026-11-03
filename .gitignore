@@ -10,3 +10,5 @@ nest-taka/dist
 
 .next
 next-env.d.ts
+
+/web-crawler/output

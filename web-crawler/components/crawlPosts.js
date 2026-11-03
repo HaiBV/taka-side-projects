@@ -1,9 +1,11 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
 const fs = require("fs");
+const path = require("path");
 const { once } = require("events");
 const { normalizeUrl } = require("../utils/normalizeUrl");
 const { getDateTime } = require("../utils/getDateTime");
+const { ensureOutputDirectory } = require("../utils/outputDir");
 
 const LIMIT_POSTS_TO_CRAWL = 1000;
 const MIN_RATING = 7;
@@ -61,7 +63,7 @@ const crawlPosts = async (urls = []) => {
   let rowsWritten = 0;
   let requestsUntilPause = getRandomInteger(5, 15);
   let forbiddenDelayMs = INITIAL_FORBIDDEN_DELAY_MS;
-  const filePath = `posts-${getDateTime()}.csv`;
+  const filePath = path.join(ensureOutputDirectory(), `posts-${getDateTime()}.csv`);
 
   if (!fs.existsSync(filePath)) {
     fs.writeFileSync(filePath, "Title;Author;Rate;Count;Total Chapters;Url;Genres\n");

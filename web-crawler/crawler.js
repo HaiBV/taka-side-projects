@@ -1,6 +1,7 @@
 const { crawlCategories } = require("./components/crawlCategories");
 const { crawlPosts } = require("./components/crawlPosts");
 const { saveCategoryCache, loadCategoryCache } = require("./utils/categoryCache");
+const { ensureOutputDirectory } = require("./utils/outputDir");
 require("dotenv").config();
 
 const isCategoryUrl = (url) => {
@@ -27,7 +28,7 @@ const parseCategories = (value = "") => [
 
 const crawler = async ({ useCategoryCache = false } = {}) => {
   if (useCategoryCache) {
-    const cache = loadCategoryCache(process.cwd());
+    const cache = loadCategoryCache(ensureOutputDirectory());
     if (!cache) {
       console.error("No cached category file found.");
       return false;
@@ -55,7 +56,7 @@ const crawler = async ({ useCategoryCache = false } = {}) => {
   try {
     const { postsUrlToVisit } = await crawlCategories(categories);
     console.log(`Found ${postsUrlToVisit.length} posts to visit.`);
-    const cache = saveCategoryCache(postsUrlToVisit, process.cwd());
+    const cache = saveCategoryCache(postsUrlToVisit, ensureOutputDirectory());
     console.log(`Saved ${cache.urls.length} category posts to ${cache.filePath}.`);
 
     await crawlPosts(postsUrlToVisit);
