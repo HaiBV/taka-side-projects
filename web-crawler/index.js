@@ -1,7 +1,11 @@
 const { crawler } = require("./crawler");
 
+const useCategoryCache = process.argv.slice(2).some((arg) =>
+  ["cached", "--cached", "--use-cache"].includes(arg.toLowerCase())
+);
+
 (async () => {
-  const succeeded = await crawler();
+  const succeeded = await crawler({ useCategoryCache });
   if (!succeeded) {
     process.exitCode = 1;
   }

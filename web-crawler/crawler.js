@@ -1,5 +1,6 @@
 const { crawlCategories } = require("./components/crawlCategories");
 const { crawlPosts } = require("./components/crawlPosts");
+const { saveCategoryCache, loadCategoryCache } = require("./utils/categoryCache");
 require("dotenv").config();
 
 const isCategoryUrl = (url) => {
@@ -7,7 +8,6 @@ const isCategoryUrl = (url) => {
     const parsedUrl = new URL(url);
     return (
       ["http:", "https:"].includes(parsedUrl.protocol) &&
-      ["truyenfull.today", "www.truyenfull.today"].includes(parsedUrl.hostname) &&
       parsedUrl.pathname.startsWith("/the-loai/") &&
       parsedUrl.pathname.length > "/the-loai/".length
     );
@@ -25,7 +25,25 @@ const parseCategories = (value = "") => [
   ),
 ];
 
-const crawler = async () => {
+const crawler = async ({ useCategoryCache = false } = {}) => {
+  if (useCategoryCache) {
+    const cache = loadCategoryCache(process.cwd());
+    if (!cache) {
+      console.error("No cached category file found.");
+      return false;
+    }
+
+    console.log(`Using category cache ${cache.filePath} (${cache.urls.length} posts).`);
+    try {
+      await crawlPosts(cache.urls);
+      console.log("CSV file has been successfully created!");
+      return true;
+    } catch (error) {
+      console.error(`Crawler failed: ${error.message}`);
+      return false;
+    }
+  }
+
   const categories = parseCategories(process.env.CATEGORIES);
   if (categories.length === 0) {
     console.error(
@@ -37,6 +55,8 @@ const crawler = async () => {
   try {
     const { postsUrlToVisit } = await crawlCategories(categories);
     console.log(`Found ${postsUrlToVisit.length} posts to visit.`);
+    const cache = saveCategoryCache(postsUrlToVisit, process.cwd());
+    console.log(`Saved ${cache.urls.length} category posts to ${cache.filePath}.`);
 
     await crawlPosts(postsUrlToVisit);
 

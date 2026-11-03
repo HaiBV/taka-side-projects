@@ -2,8 +2,10 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 const { normalizeUrl } = require("../utils/normalizeUrl");
 
-const LIMIT_POSTS_TO_CRAWL = 1000;
+const LIMIT_POSTS_TO_CRAWL = 2000;
 const LIMIT_PAGES_TO_CRAWL = 100;
+const INITIAL_FORBIDDEN_DELAY_MS = 30000;
+const FORBIDDEN_DELAY_STEP_MS = 0;
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const toAbsoluteUrl = (url, baseUrl) => {
@@ -36,6 +38,7 @@ const crawlCategories = async (urls = []) => {
   const visitedCategoryUrls = new Set();
   const postsUrlToVisit = new Set();
   let requestsUntilPause = Math.floor(Math.random() * 10) + 5;
+  let forbiddenDelayMs = INITIAL_FORBIDDEN_DELAY_MS;
 
   while (
     categoriesUrlToVisit.length > 0 &&
@@ -47,8 +50,6 @@ const crawlCategories = async (urls = []) => {
       continue;
     }
 
-    visitedCategoryUrls.add(normalizedUrl);
-
     try {
       if (requestsUntilPause <= 0) {
         console.log("Waiting 15 seconds before continuing category crawl...");
@@ -59,6 +60,8 @@ const crawlCategories = async (urls = []) => {
       requestsUntilPause--;
       console.log(`Visiting category ${normalizedUrl}`);
       const response = await axios.get(normalizedUrl);
+      visitedCategoryUrls.add(normalizedUrl);
+      forbiddenDelayMs = INITIAL_FORBIDDEN_DELAY_MS;
       const { categoryUrls, postUrls } = handleResponseCategory(normalizedUrl, response);
 
       categoriesUrlToVisit.push(...categoryUrls);
@@ -68,6 +71,14 @@ const crawlCategories = async (urls = []) => {
         }
       });
     } catch (error) {
+      if (error.response?.status === 403) {
+        console.warn(`HTTP 403 for ${normalizedUrl}; waiting ${forbiddenDelayMs / 1000}s...`);
+        await delay(forbiddenDelayMs);
+        forbiddenDelayMs += FORBIDDEN_DELAY_STEP_MS;
+        categoriesUrlToVisit.push(normalizedUrl);
+        continue;
+      }
+      visitedCategoryUrls.add(normalizedUrl);
       console.error(`Error fetching category ${normalizedUrl}: ${error.message}`);
     }
   }
